@@ -45,21 +45,21 @@ export default {
   },
   created() {
     getSongListDetails("19723756").then(val => {
-      console.log(val);
+
       let obj = {};
       obj.name = val.data.playlist.name;
       obj.songs = val.data.playlist.tracks.slice(0, 3);
       this.cardlist.push(obj);
     });
     getSongListDetails("3779629").then(val => {
-      console.log(val);
+
       let obj = {};
       obj.name = val.data.playlist.name;
       obj.songs = val.data.playlist.tracks.slice(0, 3);
       this.cardlist.push(obj);
     });
     getSongListDetails("3778678").then(val => {
-      console.log(val);
+
       let obj = {};
       obj.name = val.data.playlist.name;
       obj.songs = val.data.playlist.tracks.slice(0, 3);

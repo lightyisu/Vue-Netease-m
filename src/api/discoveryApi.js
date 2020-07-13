@@ -30,3 +30,6 @@ export function getSongListDetails(id){
         }
     })
 }
+export  function gethotSearch() {
+    return discovery.get('/search/hot/detail')
+}

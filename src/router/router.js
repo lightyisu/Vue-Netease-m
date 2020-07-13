@@ -6,6 +6,7 @@ const video= ()=>import('@/views/video.vue')
 const community= ()=>import('@/views/community.vue')
 const discovery= ()=>import('@/views/discovery.vue')
 const search=()=>import('@/components/search.vue')
+const result=()=>import('@/components/result.vue')
 
 Vue.use(VueRouter)
 /**let router=new VueRouter({
@@ -42,7 +43,11 @@ let router = new VueRouter({
         {
             path:'/search',
             component:search
-        }]
+        },
+        {
+            path:'/result',
+            component:result}
+    ]
 })
 
 export default router

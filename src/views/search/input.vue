@@ -2,7 +2,7 @@
   <div id="searchInput">
       <div id="top-search">
           <van-icon name="arrow-left" size="23px" @click="tohome"/>
-          <input type="search" id="search" placeholder="FUN-fromise_9">
+          <input type="search" id="search" placeholder="FUN-fromise_9" @keyup.enter="toresult">
       </div>
   </div>
 </template>
@@ -13,7 +13,11 @@ export default {
         methods:{
             tohome(){
                 this.$router.go(-1);
+            },
+            toresult(){
+                this.$router.push('/result')
             }
+
         }
 
 }
