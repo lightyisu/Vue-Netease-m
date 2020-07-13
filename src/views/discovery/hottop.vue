@@ -88,6 +88,7 @@ export default {
   box-sizing border-box
   border-radius: 5px;
   position relative
+  vertical-align top
 }
 
 h3 {
