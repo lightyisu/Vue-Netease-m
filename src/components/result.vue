@@ -1,12 +1,22 @@
 <template>
     <div id="result">
-        <h1>result</h1>
+        <input-top></input-top>
+        <tab></tab>
     </div>
 </template>
 
 <script>
+    import inputTop from "../views/search/input";
+    import tab from '@/views/result/tab.vue'
     export default {
         name: "result"
+        ,components:{
+            inputTop,
+            tab
+        },
+        created() {
+            console.log(this.$route.query.key);
+        }
     }
 </script>
 

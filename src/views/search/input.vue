@@ -2,7 +2,7 @@
   <div id="searchInput">
       <div id="top-search">
           <van-icon name="arrow-left" size="23px" @click="tohome"/>
-          <input type="search" id="search" placeholder="FUN-fromise_9" @keyup.enter="toresult">
+          <input type="search" id="search" placeholder="FUN-fromise_9" @keyup.enter="toresult()" v-model="keywords">
       </div>
   </div>
 </template>
@@ -10,12 +10,18 @@
 <script>
 export default {
         name:'searchInput',
+        data(){
+            return{
+                keywords:''
+            }
+        },
+
         methods:{
             tohome(){
                 this.$router.go(-1);
             },
             toresult(){
-                this.$router.push('/result')
+                this.$router.push('/result?key='+this.keywords);
             }
 
         }

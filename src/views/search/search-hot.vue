@@ -16,7 +16,7 @@
 
 <script>
 
-    import {gethotSearch} from '@/api/discoveryApi.js'
+    import {gethotSearch} from '@/api/search.js'
     export default {
         name: "search-hot",
         data(){
@@ -27,7 +27,7 @@
         },
         created() {
             gethotSearch().then((val)=>{
-                console.log(val)
+
                 this.hot_word=val.data.data;
             })
         }
@@ -42,8 +42,7 @@
         display inline-block
         position relative
         bottom 8px
-        color gray
-    .song-content
+     .song-content
 
         display inline-block
         margin-left 20px

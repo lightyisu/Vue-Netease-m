@@ -15,7 +15,7 @@
               <img :src="song.al.picUrl+'?param=50y50'" class="album" />
               <p class="index">{{index+1}}</p>
               <p class="index name">
-                {{song.al.name}}
+                {{song.al.name | capitalize}}
                 <span class="artist">-{{song.ar[0].name}}</span>
               </p>
             </div>
@@ -66,6 +66,17 @@ export default {
       this.cardlist.push(obj);
     });
     
+  },
+  filters:{
+    //对字数进行限制 防止过度溢出
+    capitalize(value){
+        if(value.length>10){
+          return value.slice(0,10)+'...'
+        }
+        else
+          return value
+
+    }
   }
 };
 </script>
@@ -127,7 +138,7 @@ h3, i {
 }
 
 .artist {
-  font-size: 17px;
+  font-size: 13px;
   margin-left: 10px;
   font-weight: 400;
   color: #ffffff;
@@ -136,6 +147,8 @@ h3, i {
 
 .name {
   margin-left: 4px;
+  max-width 200px;
+  font-size 15px
 }
 .backgroundimg
   width 100%

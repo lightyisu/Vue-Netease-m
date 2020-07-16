@@ -1,35 +1,28 @@
-import axios from 'axios'
-import {baseUrl} from '@/common/config.js'
-let discovery=axios.create({
-    baseURL:baseUrl
-})
+import api from './base'
 export function getBanner(){
-   return discovery.get('/banner',{
+   return api.get('/banner',{
         params:{
             type:0
         }
     })
 }
 export function getPersonalized(){
-    return discovery.get('/personalized',{
+    return api.get('/personalized',{
         params:{
             limit:6
         }
     })
 }
 export function getPersonalizedSongs(){
-    return discovery.get('/personalized/newsong')
+    return api.get('/personalized/newsong')
 }
 export function getTopList(){
-    return discovery.get('/toplist')
+    return api.get('/toplist')
 }
 export function getSongListDetails(id){
-    return discovery.get('/playlist/detail',{
+    return api.get('/playlist/detail',{
         params:{
             id:id
         }
     })
-}
-export  function gethotSearch() {
-    return discovery.get('/search/hot/detail')
 }

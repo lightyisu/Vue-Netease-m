@@ -9,6 +9,7 @@
     <cleartop class="content" :title="title3"></cleartop>
     <hotop class="content"></hotop>
     <div id="forlook"></div>
+
   </div>
 </template>
 
@@ -36,6 +37,7 @@ export default {
     personalizedsong,
     hotop
   },
+
 };
 </script>
 <style lang="stylus" scoped>
