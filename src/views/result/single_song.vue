@@ -1,6 +1,6 @@
 <template>
     <div id="single_song">
-       <div class="single" v-for="(song,index) in songs" :key="index+'s'">
+       <div class="single" v-for="(song,index) in songs" :key="index+'s'" @click="toplay(song.id,song.name,song.artists[0].name,song.album.id)">
        <h4 class="title">{{song.name}}</h4>
         <span><img src="@/assets/sq.png" class="sq"></span>   <p class="artist">{{song.artists[0].name}}</p><span class="album">-{{song.album.name}}</span>
       <div class="right_options">
@@ -13,7 +13,9 @@
 </template>
 
 <script>
-    import {getsearchResult_song} from '@/api/search.js'
+    //引入事件传输中转件
+    import bus from '@/utils/eventbus.js'
+    import {getsearchResult_song,baseIdToPlay} from '@/api/search.js'
     export default {
         name: "single_song",
         data(){
@@ -26,7 +28,7 @@
                 this.getsearchResult()
             }
         },
-     
+
         created() {
                this.getsearchResult();
 
@@ -37,7 +39,17 @@
                    console.log(val)
                    this.songs=val.data.result.songs;
                })
-           }
+           },
+            toplay(id,name,artist,album_id){
+               console.log(id);
+               baseIdToPlay(id).then((val)=>{
+                   console.log(val.data.data[0].url);
+                   bus.$emit('song_url',val.data.data[0].url)
+                   bus.$emit('detail_description',{name,artist,album_id})
+               })
+
+            }
+
         }
 
     }

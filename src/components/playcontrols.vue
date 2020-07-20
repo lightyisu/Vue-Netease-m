@@ -1,28 +1,72 @@
 <template>
-    <div id="playcontrols">
-      <div id="control">
-            <img src="http://p1.music.126.net/eLk9bD4luKCfpXGCJ90jJA==/109951165126018950.jpg?param=160y160" id="album_img">
+    <div id="playcontrols" :class="{hidden:hidden}">
+      <div id="control-panel" style="position: relative">
+            <img :src="pic_url" id="album_img">
           <div id="left-content">
-          <h4>Feel Special</h4>
+          <h4>{{description.name}}</h4>
             <br/>
-            <p>Twice</p>
+            <p>{{description.artist}}</p>
           </div>
 
             <div id="control-right">
-                <img src="@/assets/playcontrols.png" id="play">
+                <img :src="control_icon" id="play" @click="toggle">
 
             </div>
+
       </div>
     </div>
 </template>
 
 <script>
+    import bus from '@/utils/eventbus.js'
+    import {album_id4pic} from '@/api/search.js'
+    let audio=new Audio();
     export default {
-        name: "playcontrols"
+        name: "playcontrols",
+        data(){
+          return{
+                description:'',
+                pic_url:'',
+                hidden:true,
+                control_icon:require('@/assets/pause.png')
+          }
+        },
+        created() {
+
+            bus.$on('song_url',(val)=>{
+                audio.src=val
+                audio.play();
+                this.hidden=false;
+
+            })
+            bus.$on('detail_description',(val)=>{
+
+                this.description=val;
+                album_id4pic(val.album_id).then((val)=>{
+                    console.log(val)
+                   this.pic_url=val.data.album.picUrl;
+                })
+            })
+        },
+        methods:{
+            toggle(){
+              if (audio.paused){
+                  audio.play();
+                  this.control_icon=require('@/assets/pause.png')}
+
+              else{
+              audio.pause();
+                      this.control_icon=require('@/assets/playcontrols.png')}
+
+
+            }
+        }
     }
 </script>
 
 <style lang="stylus" scoped>
+    .hidden
+        display none
 #control
 
     height 60px
@@ -49,9 +93,17 @@
         display inline-block
         margin-left 160px
         margin-bottom 4px
+
     #left-content
         display inline-block
 
     #control-right
+        position: absolute;
+        right 5%
+        padding 14px
         display inline-block
+        img
+            margin 0
+
+
 </style>
